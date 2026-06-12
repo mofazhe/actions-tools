@@ -1,0 +1,22 @@
+name: "Git Patch Applicator"
+description: "Applies patch files from a specified directory in strict ASCII order."
+author: "mfz"
+
+inputs:
+  patches_dir:
+    description: "The directory containing .patch files"
+    required: true
+  apply_dir:
+    description: "Target directory where patches should be applied"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Apply Patches
+      shell: bash
+      env:
+        PATCHES_DIR: ${{ inputs.patches_dir }}
+        APPLY_DIR: ${{ inputs.apply_dir }}
+      run: |
+        bash ${{ github.action_path }}/action.sh
