@@ -1,0 +1,27 @@
+name: "Clone Any Public Repository"
+description: "Cross-platform Git cloner for any public repository"
+author: "mfz"
+
+inputs:
+  repository:
+    description: "The base URL of your repo (e.g., https://domain/user/repo)"
+    required: true
+  path:
+    description: "The repository path (e.g., username/repo or org/repo)"
+    required: true
+  ref:
+    description: "The branch, tag, or commit SHA to checkout"
+    required: false
+    default: "main"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Clone from Gitea and Apply Patches
+      shell: bash
+      env:
+        REPOSITORY: ${{ inputs.repository }}
+        CLONE_PATH: ${{ inputs.path }}
+        REF: ${{ inputs.ref }}
+      run: |
+        bash build.sh
