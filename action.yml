@@ -24,4 +24,4 @@ runs:
         CLONE_PATH: ${{ inputs.path }}
         REF: ${{ inputs.ref }}
       run: |
-        bash build.sh
+        bash ${{ github.action_path }}/action.sh
